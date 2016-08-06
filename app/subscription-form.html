@@ -1,0 +1,44 @@
+<form action="" #f="ngForm" style="width:500px;margin:100px 0 100px 100px">
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input id="name" type="text" 
+        required minlength="3"
+        ngControl="nameField"
+         #nameField="ngForm" class="form-control">
+
+        <div class="alert alert-danger" 
+        *ngIf="nameField.touched && nameField.errors">
+
+            <div *ngIf="nameField.errors.required">Required Field</div>
+
+            <div *ngIf="nameField.errors.minlength">Text should be at least 3 letters</div>
+
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="email">Email</label>
+        <input type="text" 
+       ngControl="email"
+       #email="ngForm"
+       required
+       pattern="/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/"
+        id="email"
+        class="form-control">
+        <div *ngIf="email.touched && email.errors" class="alert alert-danger">
+            <div *ngIf="email.errors.required">Required field</div>
+            <div *ngIf="email.errors.patterns">Not a valid email</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="frequency"> frequency of emails</label>
+        <select name="" id="frequency" 
+        ngControl="frequency"
+        #frequency="ngForm"
+        required
+        class="form-control">
+    <option>Daily</option>
+    <option>Weekly</option>
+    <option>Monthly</option>
+        </select></div>
+    <button class="btn btn-primary" [disabled]="!f.valid">Submit</button>
+</form>
